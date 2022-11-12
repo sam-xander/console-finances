@@ -87,33 +87,35 @@ var finances = [
   ["Feb-2017", 671099],
 ];
 
-// total number of months in the array
+// Number of months in finances
 var totalMonths = finances.length;
 
+// Sum of the total profit/losses
 var sum = 0;
-// sum of the profit/losses
 for (let i = 0; i < totalMonths; i++) {
   sum += finances[i][1];
 }
 
-var totalOfChanges = 0;
-var totalChanges = 0;
-// average of the changes in profit/loss
+// Average of the changes in profit/loss over the entire period
+var change = 0,
+  totalOfChanges = 0,
+  numOfChanges = 0;
+
 for (let i = 0; i < totalMonths - 1; i++) {
-  totalOfChanges += Math.abs(finances[i + 1][1] - finances[i][1]);
-  console.log(Math.abs(finances[i + 1][1] - finances[i][1]));
-  totalChanges += 1;
+  change = Math.abs(finances[i + 1][1] - finances[i][1]);
+
+  totalOfChanges += change;
+
+  console.log(`${i + 1}: + ${change}, ${totalOfChanges}`);
+
+  numOfChanges += i + 1;
 }
 
-// avgChange = avgChange.toFixed(2);
+console.log(`${totalOfChanges} / 85`);
 
-// greatest increase in profits
-// greatest decrease in profits
+// Greatest increase in profits
+// Greatest decrease in profits
 
 console.log("Financial Analysis\n----------------------------");
 console.log(`Total Months: ${totalMonths}`);
 console.log(`Total: ${sum}`);
-// console.log(`Average Change: $${avgChange}`);
-
-console.log(totalOfChanges);
-console.log(totalOfChanges / totalChanges);
