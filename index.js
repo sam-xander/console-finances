@@ -92,6 +92,7 @@ var totalMonths = finances.length;
 
 // Sum of the total profit/losses
 var sum = 0;
+
 for (let i = 0; i < totalMonths; i++) {
   sum += finances[i][1];
 }
@@ -102,20 +103,40 @@ var change = 0,
   numOfChanges = 0;
 
 for (let i = 0; i < totalMonths - 1; i++) {
-  change = Math.abs(finances[i + 1][1] - finances[i][1]);
-
+  change = finances[i + 1][1] - finances[i][1];
   totalOfChanges += change;
-
-  console.log(`${i + 1}: + ${change}, ${totalOfChanges}`);
-
-  numOfChanges += i + 1;
 }
 
-console.log(`${totalOfChanges} / 85`);
+var avgChange = (totalOfChanges / (totalMonths - 1)).toFixed(2); // Sets to 2 decimal places
 
-// Greatest increase in profits
-// Greatest decrease in profits
+// Greatest increase and decrease in profits
+var largest = finances[0][1];
+var smallest = finances[0][1];
 
+for (let i = 0; i < totalMonths - 1; i++) {
+  if (largest < finances[i + 1][1]) {
+    largest = finances[i][1];
+  }
+
+  if (smallest > finances[i + 1][1]) {
+    smallest = finances[i][1];
+  }
+}
+
+for (let i = 0; i < totalMonths; i++) {
+  if (finances[i].includes(largest)) {
+    var greatestProfit = `${finances[i][0]} ($${finances[i][1]})`;
+  }
+
+  if (finances[i].includes(smallest)) {
+    var greatestLoss = `${finances[i][0]} ($${finances[i][1]})`;
+  }
+}
+
+// Logs
 console.log("Financial Analysis\n----------------------------");
 console.log(`Total Months: ${totalMonths}`);
-console.log(`Total: ${sum}`);
+console.log(`Total: $${sum}`);
+console.log(`Average Change: $${avgChange}`);
+console.log(`Greatest Increase in Profits: ${greatestProfit}`);
+console.log(`Greatest Decrease in Profits: ${greatestLoss}`);
